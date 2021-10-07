@@ -1,0 +1,131 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    margin-left: 17%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1200px;
+    background-color: #F8F8FF;
+}
+
+.wrapper {
+    width: 60%;
+    max-width: 1000px;
+    width: auto;
+    margin-top: 200px;
+    padding: 30px 30px 10px 30px;
+    border: 1px solid black;
+    border-radius: 8px;
+    background-color: #B0E0E6;
+}
+
+header {
+    margin-bottom: 20px;
+}
+
+header::after {
+    content: '';
+    display: block;
+    height: 1px;
+    background: black;
+}
+
+.header-title {
+    padding-left: 30px;
+    text-align: center;
+    font-size: 18px;
+}
+
+.header-date {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #696969;
+}
+
+.addTaskForm-container {
+    display: flex;
+    /* align-items: center; */
+    justify-content: space-between;
+}
+
+
+#addTaskForm {
+    display: flex;
+    align-items: center;
+}
+
+.input-taskForm {
+    width: 50%;
+    min-width: 300px;
+    width: 500px;
+    max-width: 500px;
+    resize: vertical;
+    margin-right: 10px;
+    padding: 15px;
+    border-radius: 10px;
+    border: 0;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.06);
+    height: 20px;
+}
+
+.button-taskForm-submit {
+    width: 80px;
+    height: 30px;
+    border-radius: 8px;
+    background-color: #87CEFA;
+
+}
+
+.sortList > .item1 > .list2{
+    display: none;
+}
+
+.item1:hover > .list2 {
+    display: block;
+}
+
+
+.taskCard {
+    width: 100%;
+    max-width: 700px;
+    word-break: break-all;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid black;
+    border-radius: 8px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.06);
+    margin: 20px 40px 30px 0px;
+    padding: 30px 20px 20px 20px;
+    background: white;
+}
+.taskCards_list {
+    padding: 0;
+}
+.taskCard-items {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.taskCard p {
+    margin: 0 20px 0 0px;
+}
+
+.icons-container {
+    display: flex;
+}
+
+.icons-container img {
+    margin-left: 10px;
+}
+
+.footer-about {
+    text-align: center;
+}
