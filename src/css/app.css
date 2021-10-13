@@ -117,6 +117,21 @@ header::after {
 .taskCard p {
     margin: 0 20px 0 0px;
 }
+.taskCard_completed {
+    text-decoration: line-through;
+    margin: 0 20px 0 0px;
+}
+
+.taskCard_important_completed {
+    color: red;
+    text-decoration: line-through;
+    margin: 0 20px 0 0px;
+}
+
+.taskCard_important {
+    color: red;
+    margin: 0 20px 0 0px;
+}
 
 .icons-container {
     display: flex;
