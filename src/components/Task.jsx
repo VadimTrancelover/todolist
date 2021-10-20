@@ -12,9 +12,7 @@ function Task({
   important,
   taskHour,
   taskMinute,
-  onSetTimeComplete,
   timeTaskComplete,
-  onTimeTaskComplete,
 }) {
   const getIndexTask = (newTask) => {
     return tasks.findIndex((obj) => obj.newTask === newTask);
@@ -73,7 +71,6 @@ function Task({
         <div
           onClick={() => {
             onCompleteTask(index);
-            onSetTimeComplete();
           }}
         >
           <img

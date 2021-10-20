@@ -7,7 +7,7 @@ function AddTaskForm({ onSetTime }) {
   const [tasks, setNewTask] = React.useState([]);
   const [hourTask, setHourTask] = React.useState("");
   const [minuteTask, setMinuteTask] = React.useState("");
-  const [timeTaskComplete, setTimeTaskComplete] = React.useState("");
+  // const [timeTaskComplete, setTimeTaskComplete] = React.useState("");
 
   const onChange = (e) => {
     setTask(e.target.value);
@@ -20,7 +20,7 @@ function AddTaskForm({ onSetTime }) {
         newTask: task,
         taskHour: hourTask,
         taskMinute: minuteTask,
-        timeComplete: timeTaskComplete,
+        timeComplete: null,
         complete: false,
 
         important: false,
@@ -39,32 +39,29 @@ function AddTaskForm({ onSetTime }) {
     setNewTask([...tasks.filter((task) => task.id !== id)]);
   };
 
-  const onSetTimeComplete = () => {
-    setTimeTaskComplete(
-      new Date().toLocaleString("ru", {
-        month: "long",
-        day: "numeric",
-        hour: "numeric",
-        minute: "numeric",
-      })
-    );
-  };
-  const onTimeTaskComplete = (id) => {
+  const onCompleteTask = (id) => {
     setNewTask([
       ...tasks.map((task) =>
         task.id === id
-          ? { ...task, timeComplete: timeTaskComplete }
+          ? {
+              ...task,
+              complete: !task.complete,
+              timeComplete: getCurrentTime(),
+            }
           : { ...task }
       ),
     ]);
   };
 
-  const onCompleteTask = (id) => {
-    setNewTask([
-      ...tasks.map((task) =>
-        task.id === id ? { ...task, complete: !task.complete } : { ...task }
-      ),
-    ]);
+  const getCurrentTime = () => {
+    const date = new Date();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const sec = date.getSeconds();
+
+    const format = (d) => ("0" + d).slice(-2);
+
+    return format(hours) + ":" + format(minutes) + ":" + format(sec);
   };
 
   const getHourTask = () => {
@@ -95,7 +92,6 @@ function AddTaskForm({ onSetTime }) {
 
   React.useEffect(() => {
     console.log(tasks);
-    console.log(timeTaskComplete);
   }, [tasks]);
 
   React.useEffect(() => {
@@ -136,8 +132,6 @@ function AddTaskForm({ onSetTime }) {
                   timeTaskComplete={task.timeComplete}
                   index={task.id}
                   tasks={tasks}
-                  onTimeTaskComplete={onTimeTaskComplete}
-                  onSetTimeComplete={onSetTimeComplete}
                   onRemoveTask={onRemoveTask}
                   onCompleteTask={onCompleteTask}
                   onImportantTask={onImportantTask}
