@@ -82,7 +82,7 @@ header::after {
 
 }
 
-.sortList > .item1 > .list2{
+.sortList > {
     display: none;
 }
 

@@ -5,9 +5,6 @@ import { SortPopup } from ".";
 function AddTaskForm({ onSetTime }) {
   const [task, setTask] = React.useState("");
   const [tasks, setNewTask] = React.useState([]);
-  const [hourTask, setHourTask] = React.useState("");
-  const [minuteTask, setMinuteTask] = React.useState("");
-  // const [timeTaskComplete, setTimeTaskComplete] = React.useState("");
 
   const onChange = (e) => {
     setTask(e.target.value);
@@ -18,11 +15,9 @@ function AddTaskForm({ onSetTime }) {
       const newItem = {
         id: tasks.length,
         newTask: task,
-        taskHour: hourTask,
-        taskMinute: minuteTask,
+        timeTask: getTimeTaskStart(),
         timeComplete: null,
         complete: false,
-
         important: false,
       };
       setNewTask([...tasks, newItem]);
@@ -31,6 +26,7 @@ function AddTaskForm({ onSetTime }) {
 
   const onHandleCreateTask = (e) => {
     e.preventDefault();
+    getTimeTaskStart();
     addTask(task);
     setTask("");
   };
@@ -54,33 +50,28 @@ function AddTaskForm({ onSetTime }) {
   };
 
   const getCurrentTime = () => {
+
+    const date = new Date().toLocaleString('ru', {
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+    })
+
+    return date;
+  };
+
+  const getTimeTaskStart = () => {
+
+
     const date = new Date();
     const hours = date.getHours();
     const minutes = date.getMinutes();
-    const sec = date.getSeconds();
 
     const format = (d) => ("0" + d).slice(-2);
 
-    return format(hours) + ":" + format(minutes) + ":" + format(sec);
-  };
-
-  const getHourTask = () => {
-    const date = new Date();
-    const hours = date.getHours();
-    if (hours < 10) {
-      setHourTask("0" + hours);
-    } else {
-      setHourTask(hours);
-    }
-  };
-
-  const getMinuteTask = () => {
-    const date = new Date();
-    const minutes = date.getMinutes();
-    if (minutes < 10) {
-      setMinuteTask("0" + minutes);
-    } else setMinuteTask(minutes);
-  };
+    return (format(hours) + ":" + format(minutes));
+  }
 
   const onImportantTask = (id) => {
     setNewTask([
@@ -92,11 +83,6 @@ function AddTaskForm({ onSetTime }) {
 
   React.useEffect(() => {
     console.log(tasks);
-  }, [tasks]);
-
-  React.useEffect(() => {
-    getHourTask();
-    getMinuteTask();
   }, [tasks]);
 
   return (
@@ -126,8 +112,7 @@ function AddTaskForm({ onSetTime }) {
                   task={task.newTask}
                   onSetTime={onSetTime}
                   complete={task.complete}
-                  taskHour={task.taskHour}
-                  taskMinute={task.taskMinute}
+                  timeTask={task.timeTask}
                   important={task.important}
                   timeTaskComplete={task.timeComplete}
                   index={task.id}
