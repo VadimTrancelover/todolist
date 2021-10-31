@@ -1,6 +1,5 @@
 import React from "react";
 import Task from "./Task";
-import { SortPopup } from ".";
 
 function AddTaskForm({ onSetTime }) {
   const [task, setTask] = React.useState("");
@@ -23,6 +22,11 @@ function AddTaskForm({ onSetTime }) {
       setNewTask([...tasks, newItem]);
     }
   };
+
+
+  const sortByComplete = () => {
+    return tasks.filter(task => !!task.complete)
+  }
 
   const onHandleCreateTask = (e) => {
     e.preventDefault();
@@ -50,28 +54,25 @@ function AddTaskForm({ onSetTime }) {
   };
 
   const getCurrentTime = () => {
-
-    const date = new Date().toLocaleString('ru', {
-      month: 'long',
-      day: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric',
-    })
+    const date = new Date().toLocaleString("ru", {
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+    });
 
     return date;
   };
 
   const getTimeTaskStart = () => {
-
-
     const date = new Date();
     const hours = date.getHours();
     const minutes = date.getMinutes();
 
     const format = (d) => ("0" + d).slice(-2);
 
-    return (format(hours) + ":" + format(minutes));
-  }
+    return format(hours) + ":" + format(minutes);
+  };
 
   const onImportantTask = (id) => {
     setNewTask([
@@ -80,6 +81,8 @@ function AddTaskForm({ onSetTime }) {
       ),
     ]);
   };
+
+
 
   React.useEffect(() => {
     console.log(tasks);
@@ -101,7 +104,11 @@ function AddTaskForm({ onSetTime }) {
           Добавить
         </button>
       </form>
-      <SortPopup />
+      <div className='button-group'>
+           <button>Все</button>
+           <button>Важные</button>
+           <button onClick={sortByComplete}>Завершённые</button>
+      </div> 
       <div className="taskCards-container">
         <ul className="taskCards_list">
           <h4>{tasks.length > 0 ? `Задачи: ${tasks.length}` : "Задач нет"}</h4>

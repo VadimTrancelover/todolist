@@ -82,12 +82,9 @@ header::after {
 
 }
 
-.sortList > {
-    display: none;
-}
-
-.item1:hover > .list2 {
-    display: block;
+.button-group {
+    display: flex;
+    margin: 30px 0px 30px 0px;
 }
 
 
