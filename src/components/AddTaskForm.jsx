@@ -4,28 +4,43 @@ import Task from "./Task";
 function AddTaskForm({ onSetTime }) {
   const [task, setTask] = React.useState("");
   const [tasks, setNewTask] = React.useState([]);
+  // const  arrNum = [1, 2, 3, 4];
+  const [filtered, setFiltered] = React.useState(tasks);
+  
+  React.useEffect(() => {
+    setFiltered(tasks)
+  }, [tasks])
 
   const onChange = (e) => {
     setTask(e.target.value);
   };
 
+
   const addTask = (task) => {
     if (task) {
       const newItem = {
-        id: tasks.length,
-        newTask: task,
-        timeTask: getTimeTaskStart(),
-        timeComplete: null,
-        complete: false,
-        important: false,
-      };
+          id: tasks.length,
+          newTask: task,
+          timeTask: getTimeTaskStart(),
+          timeComplete: null,
+          complete: false,
+          important: false,  
+    }
       setNewTask([...tasks, newItem]);
     }
   };
 
 
-  const sortByComplete = () => {
-    return tasks.filter(task => !!task.complete)
+
+  const onFilterComplete = (complete) => {
+    if(complete) {
+      let newTasks = [...tasks].filter(task => task.complete === true)
+      setFiltered(newTasks)
+    }
+  }
+
+  const onFilterAll = () => {
+    setFiltered(tasks)
   }
 
   const onHandleCreateTask = (e) => {
@@ -86,6 +101,7 @@ function AddTaskForm({ onSetTime }) {
 
   React.useEffect(() => {
     console.log(tasks);
+    console.log(filtered);
   }, [tasks]);
 
   return (
@@ -105,15 +121,15 @@ function AddTaskForm({ onSetTime }) {
         </button>
       </form>
       <div className='button-group'>
-           <button>Все</button>
+           <button onClick={onFilterAll}>Все</button>
            <button>Важные</button>
-           <button onClick={sortByComplete}>Завершённые</button>
+           <button onClick={() => onFilterComplete(true)}>Завершённые</button>
       </div> 
       <div className="taskCards-container">
         <ul className="taskCards_list">
           <h4>{tasks.length > 0 ? `Задачи: ${tasks.length}` : "Задач нет"}</h4>
-          {tasks
-            ? tasks.map((task, index) => (
+          {filtered
+            ? filtered.map((task, index) => (
                 <Task
                   key={index}
                   task={task.newTask}
