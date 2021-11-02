@@ -12,10 +12,17 @@ function Task({
   important,
   timeTask,
   timeTaskComplete,
+  filterPost,
+  name
 }) {
   const getIndexTask = (newTask) => {
     return tasks.findIndex((obj) => obj.newTask === newTask);
   };
+
+  React.useEffect(() => {
+    filterPost(name)
+  },[])
+
 
   return (
     <li className="taskCard">

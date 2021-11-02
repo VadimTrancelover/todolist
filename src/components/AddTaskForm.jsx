@@ -4,50 +4,56 @@ import Task from "./Task";
 function AddTaskForm({ onSetTime }) {
   const [task, setTask] = React.useState("");
   const [tasks, setNewTask] = React.useState([]);
-  const [filtered, setFiltered] = React.useState(tasks);
-  
+  const [filtered, setFiltered] = React.useState("");
+  const [activeFilter, setActiveFilter] = React.useState("All");
+
+  const filters = [
+    { name: "All", buttonName: "Все" },
+    { name: "important", buttonName: "Важные" },
+    { name: "complete", buttonName: "Выполненные" },
+  ];
+
+  const onSelectActiveFilter = (key) => {
+    setActiveFilter(key);
+  };
+
+  const filterPost = (name) => {
+    if (name === "All") {
+      setFiltered(tasks);
+    } else {
+      if (name === "important") {
+        let newTasks = [...tasks.filter((task) => task.important === true)];
+        setFiltered(newTasks);
+      } else {
+        if (name === "complete") {
+          let newTasks = [...tasks.filter((task) => task.complete === true)];
+          setFiltered(newTasks);
+        }
+      }
+    }
+  };
+
   React.useEffect(() => {
     setFiltered(tasks);
-  }, [tasks])
+  }, [tasks]);
 
   const onChange = (e) => {
     setTask(e.target.value);
   };
 
-
   const addTask = (task) => {
     if (task) {
       const newItem = {
-          id: tasks.length,
-          newTask: task,
-          timeTask: getTimeTaskStart(),
-          timeComplete: null,
-          complete: false,
-          important: false,  
-    }
+        id: Math.floor(Math.random() * 100000),
+        newTask: task,
+        timeTask: getTimeTaskStart(),
+        timeComplete: null,
+        complete: false,
+        important: false,
+      };
       setNewTask([...tasks, newItem]);
     }
   };
-
-
-
-  const onFilterComplete = (complete) => {
-    if(complete) {
-      let newTasks = [...tasks].filter(task => task.complete === true)
-      console.log('Я выполнилась!')
-      setFiltered(newTasks)
-    }
-  }
-  const onFilterImportant = (important) => {
-    if(important) {
-      let newTasks = [...tasks].filter(task => task.important === true)
-      setFiltered(newTasks)
-    }
-  }
-
-  const onFilterAll = () => {
-    setFiltered(tasks)
-  }
 
   const onHandleCreateTask = (e) => {
     e.preventDefault();
@@ -56,12 +62,10 @@ function AddTaskForm({ onSetTime }) {
     setTask("");
   };
 
-
-  const onRemoveTask = (id) => {
+  const onRemoveTask = (id, name) => {
     setNewTask([...tasks.filter((task) => task.id !== id)]);
+    filterPost(name);
   };
-
-  
 
   const onCompleteTask = (id) => {
     setNewTask([
@@ -84,7 +88,6 @@ function AddTaskForm({ onSetTime }) {
       hour: "numeric",
       minute: "numeric",
     });
-
     return date;
   };
 
@@ -106,12 +109,14 @@ function AddTaskForm({ onSetTime }) {
     ]);
   };
 
+  // React.useEffect(() => {
+  //   console.log(tasks);
+  //   console.log(filtered);
+  // }, [tasks]);
 
-
-  React.useEffect(() => {
-    console.log(tasks);
-    console.log(filtered);
-  }, [tasks]);
+  // React.useEffect(() => {
+  //   console.log(activeFilter)
+  // },[activeFilter])
 
   return (
     <div>
@@ -129,14 +134,24 @@ function AddTaskForm({ onSetTime }) {
           Добавить
         </button>
       </form>
-      <div className='button-group'>
-           <button onClick={onFilterAll}>Все</button>
-           <button onClick={() => onFilterImportant(true)}>Важные</button>
-           <button onClick={() => onFilterComplete(true)}>Завершённые</button>
-      </div> 
+      <div className="button-group">
+        {filters.map((filter) => (
+          <button
+            onClick={() => {
+              onSelectActiveFilter(filter.name);
+              filterPost(filter.name);
+            }}
+            key={filter.name}
+          >
+            {filter.buttonName}
+          </button>
+        ))}
+      </div>
       <div className="taskCards-container">
         <ul className="taskCards_list">
-          <h4>{filtered.length > 0 ? `Задачи: ${filtered.length}` : "Задач нет"}</h4>
+          <h4>
+            {filtered.length > 0 ? `Задачи: ${filtered.length}` : "Задач нет"}
+          </h4>
           {filtered
             ? filtered.map((task, index) => (
                 <Task
@@ -152,6 +167,8 @@ function AddTaskForm({ onSetTime }) {
                   onRemoveTask={onRemoveTask}
                   onCompleteTask={onCompleteTask}
                   onImportantTask={onImportantTask}
+                  name={activeFilter}
+                  filterPost={filterPost}
                 />
               ))
             : ""}

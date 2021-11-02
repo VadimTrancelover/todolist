@@ -120,6 +120,7 @@ header::after {
     margin: 0 20px 0 0px;
 }
 .taskCard_completed {
+    color: #DCDCDC;
     text-decoration: line-through;
     margin: 0 20px 0 0px;
 }
