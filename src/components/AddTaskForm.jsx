@@ -4,11 +4,10 @@ import Task from "./Task";
 function AddTaskForm({ onSetTime }) {
   const [task, setTask] = React.useState("");
   const [tasks, setNewTask] = React.useState([]);
-  // const  arrNum = [1, 2, 3, 4];
   const [filtered, setFiltered] = React.useState(tasks);
   
   React.useEffect(() => {
-    setFiltered(tasks)
+    setFiltered(tasks);
   }, [tasks])
 
   const onChange = (e) => {
@@ -35,6 +34,13 @@ function AddTaskForm({ onSetTime }) {
   const onFilterComplete = (complete) => {
     if(complete) {
       let newTasks = [...tasks].filter(task => task.complete === true)
+      console.log('Я выполнилась!')
+      setFiltered(newTasks)
+    }
+  }
+  const onFilterImportant = (important) => {
+    if(important) {
+      let newTasks = [...tasks].filter(task => task.important === true)
       setFiltered(newTasks)
     }
   }
@@ -50,9 +56,12 @@ function AddTaskForm({ onSetTime }) {
     setTask("");
   };
 
+
   const onRemoveTask = (id) => {
     setNewTask([...tasks.filter((task) => task.id !== id)]);
   };
+
+  
 
   const onCompleteTask = (id) => {
     setNewTask([
@@ -122,12 +131,12 @@ function AddTaskForm({ onSetTime }) {
       </form>
       <div className='button-group'>
            <button onClick={onFilterAll}>Все</button>
-           <button>Важные</button>
+           <button onClick={() => onFilterImportant(true)}>Важные</button>
            <button onClick={() => onFilterComplete(true)}>Завершённые</button>
       </div> 
       <div className="taskCards-container">
         <ul className="taskCards_list">
-          <h4>{tasks.length > 0 ? `Задачи: ${tasks.length}` : "Задач нет"}</h4>
+          <h4>{filtered.length > 0 ? `Задачи: ${filtered.length}` : "Задач нет"}</h4>
           {filtered
             ? filtered.map((task, index) => (
                 <Task

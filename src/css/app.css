@@ -87,6 +87,11 @@ header::after {
     margin: 30px 0px 30px 0px;
 }
 
+.active-button {
+    background-color: blue;
+    border: 3px solid grey;
+}
+
 
 .taskCard {
     width: 100%;
