@@ -62,9 +62,8 @@ function AddTaskForm({ onSetTime }) {
     setTask("");
   };
 
-  const onRemoveTask = (id, name) => {
+  const onRemoveTask = (id) => {
     setNewTask([...tasks.filter((task) => task.id !== id)]);
-    filterPost(name);
   };
 
   const onCompleteTask = (id) => {
@@ -108,15 +107,6 @@ function AddTaskForm({ onSetTime }) {
       ),
     ]);
   };
-
-  // React.useEffect(() => {
-  //   console.log(tasks);
-  //   console.log(filtered);
-  // }, [tasks]);
-
-  // React.useEffect(() => {
-  //   console.log(activeFilter)
-  // },[activeFilter])
 
   return (
     <div>
