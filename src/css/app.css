@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Bitter&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bitter:wght@400;600&display=swap');
 *,
 *::before,
 *::after {
@@ -6,7 +8,8 @@
 
 body {
     margin: 0;
-    margin-left: 17%;
+    font-family: 'Bitter', serif;
+    /* margin-left: 17%; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,7 +23,6 @@ body {
     width: auto;
     margin-top: 200px;
     padding: 30px 30px 10px 30px;
-    border: 1px solid black;
     border-radius: 8px;
     background-color: #B0E0E6;
 }
@@ -70,26 +72,54 @@ header::after {
     padding: 15px;
     border-radius: 10px;
     border: 0;
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.06);
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.20);
     height: 20px;
 }
 
 .button-taskForm-submit {
-    width: 80px;
-    height: 30px;
-    border-radius: 8px;
     background-color: #87CEFA;
+    padding: 5px 7px 5px 7px;
+    border: 2px solid white;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.20);
+    border-radius: 5px; 
+    cursor: pointer;
 
 }
+
+.button-taskForm-submit:active{
+    background-color:#F8F8FF;
+}
+
 
 .button-group {
     display: flex;
+    width: 201px;
     margin: 30px 0px 30px 0px;
+    border: 2px solid white;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.20);
+    border-radius: 7px;
+}
+
+.not-active-button {
+    background-color: #87CEFA;
+    padding: 5px 5px 5px 5px;
+    border: 1px solid white;
+    border-radius: 5px; 
+    cursor: pointer;
+}
+
+.not-active-button:hover {
+    background: #B0C4DE;
 }
 
 .active-button {
-    background-color: blue;
-    border: 3px solid grey;
+    background-color:#F8F8FF;
+    border: 1px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.active-button:hover {
+    background: #F0FFF0
 }
 
 
@@ -100,9 +130,8 @@ header::after {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border: 1px solid black;
     border-radius: 8px;
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.06);
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.20);
     margin: 20px 40px 30px 0px;
     padding: 30px 20px 20px 20px;
     background: white;
@@ -120,19 +149,21 @@ header::after {
     margin: 0 20px 0 0px;
 }
 .taskCard_completed {
-    color: #DCDCDC;
+    color: #A9A9A9;
     text-decoration: line-through;
     margin: 0 20px 0 0px;
 }
 
 .taskCard_important_completed {
     color: red;
+
     text-decoration: line-through;
     margin: 0 20px 0 0px;
 }
 
 .taskCard_important {
     color: red;
+    font-weight: 600;
     margin: 0 20px 0 0px;
 }
 
@@ -146,4 +177,8 @@ header::after {
 
 .footer-about {
     text-align: center;
+}
+
+img {
+    cursor: pointer;
 }

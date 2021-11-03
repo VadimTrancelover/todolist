@@ -127,6 +127,7 @@ function AddTaskForm({ onSetTime }) {
       <div className="button-group">
         {filters.map((filter) => (
           <button
+            className={filter.name === activeFilter ? "active-button" : "not-active-button"}
             onClick={() => {
               onSelectActiveFilter(filter.name);
               filterPost(filter.name);
