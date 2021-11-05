@@ -29,6 +29,18 @@ body {
     background-color: #B0E0E6;
 }
 
+@media (min-width: 767px) {
+    .input-taskForm {
+        min-width: 300px;
+    }
+}
+@media (min-width: 992px) {
+    .input-taskForm {
+        min-width: 500px;
+    }
+}
+
+
 header {
     margin-bottom: 20px;
 }
@@ -65,10 +77,10 @@ header::after {
 }
 
 .input-taskForm {
-    width: 50%;
-    min-width: 300px;
-    width: 500px;
-    max-width: 500px;
+    width: 70%;
+    /* min-width: 300px;
+    /* width: 500px; */
+    /* max-width: 500px; */
     resize: vertical;
     margin-right: 10px;
     padding: 15px;
