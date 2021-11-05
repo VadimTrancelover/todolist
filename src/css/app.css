@@ -6,14 +6,16 @@
     box-sizing: border-box;
 }
 
+html {
+    overflow-y: scroll;
+}
+
 body {
     margin: 0;
     font-family: 'Bitter', serif;
-    /* margin-left: 17%; */
     display: flex;
     justify-content: center;
     align-items: center;
-    /* width: 1200px; */
     background-color: #F8F8FF;
 }
 
@@ -126,6 +128,7 @@ header::after {
 .taskCard {
     width: 100%;
     max-width: 700px;
+    height: auto;
     word-break: break-all;
     display: flex;
     align-items: center;
@@ -136,6 +139,7 @@ header::after {
     padding: 30px 20px 20px 20px;
     background: white;
 }
+
 .taskCards_list {
     padding: 0;
 }
@@ -148,6 +152,7 @@ header::after {
 .taskCard p {
     margin: 0 20px 0 0px;
 }
+
 .taskCard_completed {
     color: #A9A9A9;
     text-decoration: line-through;
@@ -156,7 +161,6 @@ header::after {
 
 .taskCard_important_completed {
     color: red;
-
     text-decoration: line-through;
     margin: 0 20px 0 0px;
 }
@@ -167,8 +171,17 @@ header::after {
     margin: 0 20px 0 0px;
 }
 
-.icons-container {
+.icons-container  {
+    opacity: 0;
     display: flex;
+    visibility: hidden;
+    transition:  visibility 0.5s, opacity 0.5s;
+}
+
+.taskCard:hover .icons-container{
+    opacity: 1;
+    visibility: visible;
+    
 }
 
 .icons-container img {
@@ -179,6 +192,19 @@ header::after {
     text-align: center;
 }
 
+.footer-link-developer {
+    text-decoration: none;    
+}
+
+.footer-link-developer:visited { 
+    color: blue; 
+}
+
 img {
     cursor: pointer;
+}
+
+img:hover {
+    transform: translateY(-3px);
+    transition: transform 0.2s;
 }
