@@ -21,6 +21,7 @@ function Task({
 
   React.useEffect(() => {
     filterPost(name)
+    console.log("Я закрылся!")
   },[])
 
 

@@ -30,8 +30,11 @@ body {
 }
 
 @media (min-width: 767px) {
+    .wrapper {
+        margin-bottom: 50px;
+    }
     .input-taskForm {
-        min-width: 300px;
+        min-width: 400px;
     }
 }
 @media (min-width: 992px) {
@@ -184,17 +187,17 @@ header::after {
 }
 
 .icons-container  {
-    opacity: 0;
+    /* opacity: 0; */
     display: flex;
-    visibility: hidden;
+    /* visibility: hidden; */
     transition:  visibility 0.5s, opacity 0.5s;
 }
 
-.taskCard:hover .icons-container{
+/* .taskCard:hover .icons-container{
     opacity: 1;
     visibility: visible;
     
-}
+} */
 
 .icons-container img {
     margin-left: 10px;
